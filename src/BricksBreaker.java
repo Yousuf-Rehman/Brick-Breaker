@@ -3,52 +3,22 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-class Bricks extends Assests {
-
-    private int bw, bh;
-
-    Bricks(int x, int y, int bw, int bh) {
-        X = x;
-        Y = y;
-        this.bw = bw;
-        this.bh = bh;
-    }
-
-}
-
-class Ball extends Assests {
-    private int br;
-
-    Ball(int x, int y, int br) {
-        X = x;
-        Y = y;
-        this.br = br;
-    }
-}
-
-class Paddle extends Assests {
-    private int pw, ph;
-
-    Paddle(int x, int y, int pw, int ph) {
-        X = x;
-        Y = y;
-        this.pw = pw;
-        this.ph = ph;
-    }
-
-}
-
 public class BricksBreaker {
     private int level;
     private ArrayList<Bricks> bricks;
     private Ball ball;
     private Paddle paddle;
+    private int BoundWidth, BoundHeight;
+    int score;
 
     public BricksBreaker(int RW, int RH) {
         bricks = new ArrayList<>();
-        ball = new Ball(RW / 2, RH - 100, LevelData.BR);
-        paddle = new Paddle(RW / 2, RH - 80, LevelData.PW, LevelData.PH);
+        BoundWidth = RW;
+        BoundHeight = RH;
+        ball = new Ball(BoundWidth / 2, BoundHeight - 100, LevelData.BR);
+        paddle = new Paddle(BoundWidth / 2, BoundHeight - 80, LevelData.PW, LevelData.PH);
         level = 1;
+        score = 0;
         InitLevel();
     }
 
@@ -66,11 +36,20 @@ public class BricksBreaker {
         return level;
     }
 
-    public ArrayList<Bricks> getbricks() {
+    /*bricks ArrayList getter*/
+    public ArrayList<Bricks> getBricks(){
         return bricks;
     }
 
-    public int[] getbricksX() {// coverting Array List to array
+    public int getBW() {// brick width
+        return LevelData.BW;
+    }
+
+    public int getBH() {// brick height
+        return LevelData.BH;
+    }
+
+    public int[] getbricksX() {// converting Array List to array
         int[] X = new int[bricks.size()];
         for (int i = 0; i < X.length; i++) {
             X[i] = bricks.get(i).X;
@@ -86,39 +65,21 @@ public class BricksBreaker {
         return Y;
     }
 
-    public int getBW() {// brick width
-        return LevelData.BW;
+    /*paddle Getter*/
+    public Paddle getPaddle(){
+        return paddle;
     }
 
-    public int getBH() {// brick height
-        return LevelData.BH;
+    /*ball Getter*/
+    public Ball getBall(){
+        return ball;
     }
 
-    public int getBallR() {
-        return LevelData.BR;
+    public void scoreInc(int s){
+        score += s;
     }
 
-    public int getPaddleH() {
-        return LevelData.PH;
-    }
-
-    public int getPaddleW() {
-        return LevelData.PW;
-    }
-
-    public int getPaddleX() {
-        return paddle.X;
-    }
-
-    public int getPaddleY() {
-        return paddle.Y;
-    }
-
-    public int getBallX() {
-        return ball.X;
-    }
-
-    public int getBallY() {
-        return ball.Y;
+    public int getScore(){
+        return score;
     }
 }

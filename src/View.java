@@ -11,11 +11,12 @@ import javax.swing.*;
 
 public class View extends JPanel {
 
-    protected static int RECT_WIDTH = 1056;
-    protected static int RECT_HEIGHT = 640;
+    protected static int RECT_WIDTH;
+    protected static int RECT_HEIGHT;
     protected static final Font font = new Font("TimesRoman", Font.BOLD, 20);
     protected static final Font scorefont = new Font("TimesRoman", Font.BOLD, 24);
 
+    protected int scores;
     protected static String str;
     protected int[] Xpos;
     protected int[] Ypos;
@@ -27,6 +28,7 @@ public class View extends JPanel {
     View(int RW, int RH) {
         RECT_WIDTH = RW;
         RECT_HEIGHT = RH;
+        scores = 0;
     }
 
     // Xpos and Ypos are the positions of brick and rw. rh are width and height
@@ -49,6 +51,10 @@ public class View extends JPanel {
         this.BallXpos = BallXpos;
         this.BallYpos = BallYpos;
         this.BallR = BallR;
+    }
+
+    void SetScore(int s){
+        scores = s;
     }
 
     void ShowAll() {
@@ -85,5 +91,15 @@ public class View extends JPanel {
         //shift x and y by the radius of the circle in order to correctly center it
         g.fillOval(BallXpos - BallR, BallYpos - BallR, diameter, diameter);
 
+        UpdatingPlayersData(g);
+    }
+
+    private void UpdatingPlayersData(Graphics g){
+        g.setColor(Color.BLACK);
+        g.setFont(font);
+
+        g.drawString("Scores: ", RECT_WIDTH + 20, 30);
+        g.setFont(scorefont);
+        g.drawString(Integer.toString(scores), RECT_WIDTH + 100, 30);
     }
 }

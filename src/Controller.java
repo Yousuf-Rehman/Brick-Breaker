@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Controller implements KeyListener {
     private static final int BoundWidth = 1280, BoundHeight = 640;
+    private static final int SCORE_AREA_RECT = 200;
     private View view;// view
     private BricksBreaker bricksBreaker;// model
 
@@ -18,8 +19,8 @@ public class Controller implements KeyListener {
 
     public Controller() {
 
-        this.view = new View(BoundWidth - 200, BoundHeight);
-        this.bricksBreaker = new BricksBreaker(BoundWidth - 200, BoundHeight);
+        this.view = new View(BoundWidth - SCORE_AREA_RECT, BoundHeight);
+        this.bricksBreaker = new BricksBreaker(BoundWidth - SCORE_AREA_RECT, BoundHeight);
         Frame = new JFrame();
 
         /* Frame settings */
@@ -31,10 +32,9 @@ public class Controller implements KeyListener {
         Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Frame.setVisible(true);
 
-        SetBricks();
-        SetPaddle();
-        SetBall();
-        ShowAll();
+        RefreshView();
+        Multithreading m = new Multithreading();
+        m.start();
     }
 
     @Override
@@ -46,21 +46,18 @@ public class Controller implements KeyListener {
                 switch (it.next()) {
 
                     case KeyEvent.VK_RIGHT:// Right arrow key code
-
+                        bricksBreaker.getPaddle().Movement(1, BoundWidth - SCORE_AREA_RECT, BoundHeight);//right
                         break;
 
                     case KeyEvent.VK_LEFT:// Left arrow key code
-
+                        bricksBreaker.getPaddle().Movement(2, BoundWidth- SCORE_AREA_RECT, BoundHeight);//left
                         break;
 
                     case KeyEvent.VK_SPACE:
 
                         break;
                 }
-                SetBricks();
-                SetPaddle();
-                SetBall();
-                ShowAll();
+                RefreshView();
             }
         }
     }
@@ -81,15 +78,43 @@ public class Controller implements KeyListener {
     }
 
     void SetPaddle() {
-        this.view.SetPaddle(bricksBreaker.getPaddleX(), bricksBreaker.getPaddleY(), bricksBreaker.getPaddleW(),
-                bricksBreaker.getPaddleH());
+        this.view.SetPaddle(bricksBreaker.getPaddle().getX(), bricksBreaker.getPaddle().getY(), bricksBreaker.getPaddle().getWidth(),
+                bricksBreaker.getPaddle().getHeight());
     }
 
     void SetBall() {
-        this.view.SetBall(bricksBreaker.getBallX(), bricksBreaker.getBallY(), bricksBreaker.getBallR());
+        this.view.SetBall(bricksBreaker.getBall().getX(), bricksBreaker.getBall().getY(), bricksBreaker.getBall().getRadius());
     }
 
+    void SetScore(){
+        view.SetScore(bricksBreaker.getScore());
+    }
     void ShowAll() {
         view.ShowAll();
+    }
+
+    void RefreshView(){
+        SetBricks();
+        SetPaddle();
+        SetBall();
+        SetScore();
+        ShowAll();
+    }
+
+    class Multithreading extends Thread
+    {
+        public void run()
+        {
+            while(true) {
+                bricksBreaker.scoreInc(bricksBreaker.getBall().Movement(bricksBreaker.getBricks(), bricksBreaker.getPaddle(),
+                        BoundWidth - SCORE_AREA_RECT, BoundHeight));
+                RefreshView();
+                try {
+                    TimeUnit.MILLISECONDS.sleep(15);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
