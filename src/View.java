@@ -15,8 +15,9 @@ public class View extends JPanel {
     protected static int RECT_HEIGHT;
     protected static final Font font = new Font("TimesRoman", Font.BOLD, 20);
     protected static final Font scorefont = new Font("TimesRoman", Font.BOLD, 24);
+    private static Color BricksColor, BackGroundColor, PaddleColor, BallColor;
 
-    protected int scores;
+    protected int scores, Highscores;
     protected static String str;
     protected int[] Xpos;
     protected int[] Ypos;
@@ -25,10 +26,14 @@ public class View extends JPanel {
     protected int PXpos, PYpos, PW, PH;
 
     protected int BallXpos, BallYpos, BallR;
-    View(int RW, int RH) {
+    View(int RW, int RH, Color bricksColor, Color backGroundColor, Color paddleColor, Color ballColor) {
         RECT_WIDTH = RW;
         RECT_HEIGHT = RH;
         scores = 0;
+        BricksColor = bricksColor;
+        BackGroundColor = backGroundColor;
+        PaddleColor = paddleColor;
+        BallColor = ballColor;
     }
 
     // Xpos and Ypos are the positions of brick and rw. rh are width and height
@@ -57,49 +62,64 @@ public class View extends JPanel {
         scores = s;
     }
 
+    void SetHighScores(int s){
+        Highscores = s;
+    }
+
     void ShowAll() {
         repaint();
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) {/*main display function: display all data*/
         super.paintComponent(g);
         // g.drawImage(background_Image, 0, 0, null);
-        g.setColor(Color.BLACK);
+        g.setColor(BackGroundColor);
         g.fillRect(0, 0, RECT_WIDTH, RECT_HEIGHT);
 
         if (Xpos != null)
             for (int i = 0; i < Xpos.length; i++) {
 
-                g.setColor(Color.WHITE);
+                g.setColor(BricksColor);
                 Rectangle r = new Rectangle(Xpos[i], Ypos[i], rw, rh);
                 g.fillRect((int) r.getX(), (int) r.getY(), (int) r.getWidth(), (int) r.getHeight());
 
-                g.setColor(Color.BLACK);
+                if(BricksColor == Color.WHITE)
+                    g.setColor(Color.BLACK);
+                else
+                    g.setColor(Color.WHITE);
                 g.drawRect(Xpos[i], Ypos[i], rw, rh);
             }
 
-        g.setColor(Color.WHITE);
+        g.setColor(PaddleColor);
         Rectangle r = new Rectangle(PXpos, PYpos, PW, PH);
         g.fillRect((int) r.getX(), (int) r.getY(), (int) r.getWidth(), (int) r.getHeight());
 
-        g.setColor(Color.BLACK);
+        g.setColor(Color.WHITE);/*Boundary of Paddle*/
         g.drawRect(PXpos, PYpos, PW, PH);
 
-        g.setColor(Color.WHITE);
+        g.setColor(BallColor);
         int diameter = BallR * 2;
         //shift x and y by the radius of the circle in order to correctly center it
         g.fillOval(BallXpos - BallR, BallYpos - BallR, diameter, diameter);
+        g.setColor(Color.WHITE);
+        g.drawOval(BallXpos - BallR, BallYpos - BallR, diameter, diameter);
 
         UpdatingPlayersData(g);
     }
 
+    /*score and other stuff is displayed here*/
     private void UpdatingPlayersData(Graphics g){
         g.setColor(Color.BLACK);
         g.setFont(font);
-
         g.drawString("Scores: ", RECT_WIDTH + 20, 30);
         g.setFont(scorefont);
         g.drawString(Integer.toString(scores), RECT_WIDTH + 100, 30);
+
+        g.setColor(Color.BLACK);
+        g.setFont(font);
+        g.drawString(" High Scores: ", RECT_WIDTH + 10, RECT_HEIGHT - 100);
+        g.setFont(scorefont);
+        g.drawString(Integer.toString(Highscores), RECT_WIDTH + 80, RECT_HEIGHT - 70);
     }
 }

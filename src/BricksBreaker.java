@@ -10,6 +10,7 @@ public class BricksBreaker {
     private Paddle paddle;
     private int BoundWidth, BoundHeight;
     int score;
+    private static int HighScore = 0;
 
     public BricksBreaker(int RW, int RH) {
         bricks = new ArrayList<>();
@@ -77,9 +78,15 @@ public class BricksBreaker {
 
     public void scoreInc(int s){
         score += s;
+        if(HighScore <= score)
+            HighScore = score;
+        System.out.print(score);System.out.print(" ");
+        System.out.println(HighScore);
     }
 
     public int getScore(){
         return score;
     }
+
+    public int getHighScore(){ return HighScore;}
 }
