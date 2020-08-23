@@ -63,6 +63,7 @@ public class MVC_MAIN {
                     {
                         Frame.setEnabled(true);
                         Frame2.dispose();
+
                     }
                 });
                 Frame2.setLayout(null);

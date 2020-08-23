@@ -3,11 +3,23 @@
   <component name="ChangeListManager">
     <list default="true" id="d309204d-5ef8-43b0-9dcd-5122b7f9bd76" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Brick-Breaker/Assests.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Brick-Breaker/Assests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Brick-Breaker/Ball.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Brick-Breaker/Ball.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Brick-Breaker/Bricks.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Brick-Breaker/Bricks.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Brick-Breaker/BricksBreaker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Brick-Breaker/BricksBreaker.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Brick-Breaker/Controller$Multithreading.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Brick-Breaker/Controller$Multithreading.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Brick-Breaker/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Brick-Breaker/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Brick-Breaker/LevelData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Brick-Breaker/LevelData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Brick-Breaker/MVC_MAIN$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Brick-Breaker/MVC_MAIN$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Brick-Breaker/MVC_MAIN$2$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Brick-Breaker/MVC_MAIN$2$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Brick-Breaker/MVC_MAIN$2$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Brick-Breaker/MVC_MAIN$2$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Brick-Breaker/MVC_MAIN$2$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Brick-Breaker/MVC_MAIN$2$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Brick-Breaker/MVC_MAIN$2$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Brick-Breaker/MVC_MAIN$2$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Brick-Breaker/MVC_MAIN$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Brick-Breaker/MVC_MAIN$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Brick-Breaker/MVC_MAIN.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Brick-Breaker/MVC_MAIN.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Brick-Breaker/Paddle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Brick-Breaker/Paddle.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Brick-Breaker/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Brick-Breaker/View.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Assests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Assests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BricksBreaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BricksBreaker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LevelData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LevelData.java" afterDir="false" />
@@ -79,7 +91,7 @@
       <workItem from="1597696739912" duration="91000" />
       <workItem from="1597696862495" duration="620000" />
       <workItem from="1597699121269" duration="31878000" />
-      <workItem from="1597935482379" duration="10726000" />
+      <workItem from="1597935482379" duration="15426000" />
     </task>
     <servers />
   </component>

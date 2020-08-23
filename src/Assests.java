@@ -21,20 +21,19 @@ public abstract class Assests {
     int getY() {
         return Y;
     }
-
-    abstract public int Movement(int direction, int BoundWidth, int BoundHeight);
-    abstract public int Movement(ArrayList<Bricks> bricks, Paddle paddle, int BoundWidth, int BoundHeight);
 }
 
 class Bricks extends Assests {
 
     private int bw, bh;
+    private int brickHits;
 
-    Bricks(int x, int y, int bw, int bh) {
+    Bricks(int x, int y, int bw, int bh, int brickHits) {
         X = x;
         Y = y;
         this.bw = bw;
         this.bh = bh;
+        this.brickHits = brickHits;
     }
 
     public int getWidth() {// brick width
@@ -44,10 +43,6 @@ class Bricks extends Assests {
     public int getHeight() {// brick height
         return LevelData.BH;
     }
-
-    /*Ignoring these*/
-    public int Movement(int direction, int BoundWidth, int BoundHeight){ return 0;};
-    public int Movement(ArrayList<Bricks> bricks, Paddle paddle, int BoundWidth, int BoundHeight){ return 0;};
 }
 
 class Ball extends Assests {
@@ -66,18 +61,6 @@ class Ball extends Assests {
         return LevelData.BR;
     }
 
-    public int Movement(int direction, int BoundWidth, int BoundHeight){
-        X += BallX_Step;
-        Y += BallY_Step;
-
-        if(X <= 0 || X >= BoundWidth)
-            BallX_Step = -BallX_Step;
-
-        if(Y <= 0 || Y >= BoundHeight)
-            BallY_Step = -BallY_Step;
-
-        return 0;
-    }
 
     public int Movement(ArrayList<Bricks> bricks, Paddle paddle, int BoundWidth, int BoundHeight){//collision with other
 
@@ -145,6 +128,4 @@ class Paddle extends Assests {
         }
         return 0;
     }
-    /*Ignoring*/
-    public int Movement(ArrayList<Bricks> bricks, Paddle paddle, int BoundWidth, int BoundHeight){ return 0;};
 }

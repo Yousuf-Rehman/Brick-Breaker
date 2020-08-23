@@ -17,7 +17,7 @@ public class View extends JPanel {
     protected static final Font scorefont = new Font("TimesRoman", Font.BOLD, 24);
     private static Color BricksColor, BackGroundColor, PaddleColor, BallColor;
 
-    protected int scores, Highscores;
+    protected int scores, Highscores, level;
     protected static String str;
     protected int[] Xpos;
     protected int[] Ypos;
@@ -58,12 +58,13 @@ public class View extends JPanel {
         this.BallR = BallR;
     }
 
-    void SetScore(int s){
+    void SetScore(int s, int hs){
         scores = s;
+        Highscores = hs;
     }
 
-    void SetHighScores(int s){
-        Highscores = s;
+    void SetLevel(int l){
+        level = l;
     }
 
     void ShowAll() {
@@ -115,6 +116,12 @@ public class View extends JPanel {
         g.drawString("Scores: ", RECT_WIDTH + 20, 30);
         g.setFont(scorefont);
         g.drawString(Integer.toString(scores), RECT_WIDTH + 100, 30);
+
+        g.setColor(Color.RED);
+        g.setFont(font);
+        g.drawString("Level: ", RECT_WIDTH + 20, 60);
+        g.setFont(scorefont);
+        g.drawString(Integer.toString(level), RECT_WIDTH + 100, 60);
 
         g.setColor(Color.BLACK);
         g.setFont(font);

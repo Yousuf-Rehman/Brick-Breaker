@@ -72,7 +72,6 @@ public class Controller implements KeyListener {
                         break;
                 }
                 RefreshView();
-                System.out.println(isMultitaskRunning);
             }
         }
     }
@@ -101,23 +100,29 @@ public class Controller implements KeyListener {
         this.view.SetBall(bricksBreaker.getBall().getX(), bricksBreaker.getBall().getY(), bricksBreaker.getBall().getRadius());
     }
 
-    private void SetScore(){
-        view.SetScore(bricksBreaker.getScore());
+    private void SetScores(){
+        view.SetScore(bricksBreaker.getScore(), bricksBreaker.getHighScore());
     }
-    private void SetHighScores(){
-        view.SetHighScores(bricksBreaker.getHighScore());
+
+    private void SetLevel(){
+        view.SetLevel(bricksBreaker.getLevel());
     }
 
     private void ShowAll() {
         view.ShowAll();
     }
 
+    private void CheckLevelChange(){
+        bricksBreaker.LevelUpIfBricksEmpty();
+    }
+
     private void RefreshView(){
+        CheckLevelChange();
+        SetLevel();
         SetBricks();
         SetPaddle();
         SetBall();
-        SetScore();
-        SetHighScores();
+        SetScores();
         ShowAll();
     }
 

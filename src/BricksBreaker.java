@@ -2,6 +2,7 @@
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 public class BricksBreaker {
     private int level;
@@ -13,24 +14,89 @@ public class BricksBreaker {
     private static int HighScore = 0;
 
     public BricksBreaker(int RW, int RH) {
-        bricks = new ArrayList<>();
         BoundWidth = RW;
         BoundHeight = RH;
-        ball = new Ball(BoundWidth / 2, BoundHeight - 100, LevelData.BR);
-        paddle = new Paddle(BoundWidth / 2, BoundHeight - 80, LevelData.PW, LevelData.PH);
         level = 1;
         score = 0;
-        InitLevel();
+        SetLevel(level);
     }
 
-    private void InitLevel() {
-        if (level == 1) {
-            for (int i = LevelData.BrickStartOffsetX; i < (LevelData.COLS1 * LevelData.BW
+    private void SetLevel(int levels) {
+        switch (levels) {
+            case 1:
+                bricks = new ArrayList<>();
+                paddle = new Paddle(BoundWidth / 2, BoundHeight - 80, LevelData.PW1, LevelData.PH1);
+                ball = new Ball(BoundWidth / 2, BoundHeight - 100, LevelData.BR);
+                for (int i = LevelData.BrickStartOffsetX; i < (LevelData.COLS1 * LevelData.BW
                     + LevelData.BrickStartOffsetX); i = i + LevelData.BW)
-                for (int j = LevelData.BrickStartOffsetY; j < (LevelData.ROWS1 * LevelData.BH
+                    for (int j = LevelData.BrickStartOffsetY; j < (LevelData.ROWS1 * LevelData.BH
                         + LevelData.BrickStartOffsetY); j = j + LevelData.BH)
-                    bricks.add(new Bricks(i, j, LevelData.BW, LevelData.BH));
+                        bricks.add(new Bricks(i, j, LevelData.BW, LevelData.BH, LevelData.BrickHit1));
+                break;
+
+            case 2:
+                bricks = new ArrayList<>();
+                paddle = new Paddle(BoundWidth / 2, BoundHeight - 80, LevelData.PW2, LevelData.PH2);
+                ball = new Ball(BoundWidth / 2, BoundHeight - 100, LevelData.BR);
+                for (int i = LevelData.BrickStartOffsetX; i < (LevelData.COLS2 * LevelData.BW
+                        + LevelData.BrickStartOffsetX); i = i + LevelData.BW)
+                    for (int j = LevelData.BrickStartOffsetY; j < (LevelData.ROWS2 * LevelData.BH
+                            + LevelData.BrickStartOffsetY); j = j + LevelData.BH)
+                        bricks.add(new Bricks(i, j, LevelData.BW, LevelData.BH, LevelData.BrickHit2));
+                break;
+
+            case 3:
+                bricks = new ArrayList<>();
+                paddle = new Paddle(BoundWidth / 2, BoundHeight - 80, LevelData.PW3, LevelData.PH3);
+                ball = new Ball(BoundWidth / 2, BoundHeight - 100, LevelData.BR);
+                for (int i = LevelData.BrickStartOffsetX; i < (LevelData.COLS3 * LevelData.BW
+                        + LevelData.BrickStartOffsetX); i = i + LevelData.BW)
+                    for (int j = LevelData.BrickStartOffsetY; j < (LevelData.ROWS3 * LevelData.BH
+                            + LevelData.BrickStartOffsetY); j = j + LevelData.BH)
+                        bricks.add(new Bricks(i, j, LevelData.BW, LevelData.BH, LevelData.BrickHit3));
+                break;
+
+            case 4:
+                int count = 1;
+                bricks = new ArrayList<>();
+                paddle = new Paddle(BoundWidth / 2, BoundHeight - 80, LevelData.PW4, LevelData.PH4);
+                ball = new Ball(BoundWidth / 2, BoundHeight - 100, LevelData.BR);
+                for (int j = LevelData.BrickStartOffsetY; j < (LevelData.ROWS4 * LevelData.BH
+                        + LevelData.BrickStartOffsetY); j = j + LevelData.BH) {
+                    for (int i = BoundWidth / 2; i < (count * LevelData.BW + BoundWidth / 2); i = i + LevelData.BW) {
+
+                        bricks.add(new Bricks(i, j, LevelData.BW, LevelData.BH, LevelData.BrickHit4));
+
+                    }
+                    count++;
+                }
+
+                count = 1;
+                for (int j = LevelData.BrickStartOffsetY; j < (LevelData.ROWS4 * LevelData.BH
+                        + LevelData.BrickStartOffsetY); j = j + LevelData.BH) {
+                    for (int i = BoundWidth/2 - LevelData.BW, k=0; k < count; i = i - LevelData.BW, k++) {
+                        bricks.add(new Bricks(i, j, LevelData.BW, LevelData.BH, LevelData.BrickHit4));
+                    }
+                    count++;
+                }
+                break;
+
+            case 5:
+                bricks = new ArrayList<>();
+                paddle = new Paddle(BoundWidth / 2, BoundHeight - 80, LevelData.PW5, LevelData.PH5);
+                ball = new Ball(BoundWidth / 2, BoundHeight - 100, LevelData.BR);
+                for (int i = LevelData.BrickStartOffsetX; i < (LevelData.COLS4 * LevelData.BW
+                        + LevelData.BrickStartOffsetX); i = i + LevelData.BW)
+                    for (int j = LevelData.BrickStartOffsetY; j < (i * LevelData.BH
+                            + LevelData.BrickStartOffsetY); j = j + LevelData.BH)
+                        bricks.add(new Bricks(i, j, LevelData.BW, LevelData.BH, LevelData.BrickHit5));
+                break;
+
+            default:
+
+                break;
         }
+
     }
 
     public int getLevel() {
@@ -80,8 +146,6 @@ public class BricksBreaker {
         score += s;
         if(HighScore <= score)
             HighScore = score;
-        System.out.print(score);System.out.print(" ");
-        System.out.println(HighScore);
     }
 
     public int getScore(){
@@ -89,4 +153,11 @@ public class BricksBreaker {
     }
 
     public int getHighScore(){ return HighScore;}
+
+    public void LevelUpIfBricksEmpty(){
+        if(bricks.size() <= 0) {
+            level++;
+            SetLevel(level);
+        }
+    }
 }
