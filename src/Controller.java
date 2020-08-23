@@ -87,7 +87,7 @@ public class Controller implements KeyListener {
     }
 
     private void SetBricks() {
-        this.view.SetBricks(bricksBreaker.getbricksX(), bricksBreaker.getbricksY(), bricksBreaker.getBW(),
+        this.view.SetBricks(bricksBreaker.getbricksX(), bricksBreaker.getbricksY(),bricksBreaker.getbricksHit(), bricksBreaker.getBW(),
                 bricksBreaker.getBH());
     }
 

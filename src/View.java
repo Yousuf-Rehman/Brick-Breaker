@@ -21,6 +21,7 @@ public class View extends JPanel {
     protected static String str;
     protected int[] Xpos;
     protected int[] Ypos;
+    protected int[] bricksHit;
     protected int rw, rh;
 
     protected int PXpos, PYpos, PW, PH;
@@ -38,9 +39,10 @@ public class View extends JPanel {
 
     // Xpos and Ypos are the positions of brick and rw. rh are width and height
     // respectively
-    public void SetBricks(int[] Xpos, int[] Ypos, int rw, int rh) {
+    public void SetBricks(int[] Xpos, int[] Ypos, int[] bricksHit, int rw, int rh) {
         this.Xpos = Xpos;
         this.Ypos = Ypos;
+        this.bricksHit = bricksHit;
         this.rw = rw;
         this.rh = rh;
     }
@@ -81,7 +83,10 @@ public class View extends JPanel {
         if (Xpos != null)
             for (int i = 0; i < Xpos.length; i++) {
 
-                g.setColor(BricksColor);
+                if(bricksHit[i] == 2)
+                    g.setColor(Color.RED);
+                else
+                    g.setColor(BricksColor);
                 Rectangle r = new Rectangle(Xpos[i], Ypos[i], rw, rh);
                 g.fillRect((int) r.getX(), (int) r.getY(), (int) r.getWidth(), (int) r.getHeight());
 

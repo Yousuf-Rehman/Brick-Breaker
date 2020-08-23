@@ -85,9 +85,9 @@ public class BricksBreaker {
                 bricks = new ArrayList<>();
                 paddle = new Paddle(BoundWidth / 2, BoundHeight - 80, LevelData.PW5, LevelData.PH5);
                 ball = new Ball(BoundWidth / 2, BoundHeight - 100, LevelData.BR);
-                for (int i = LevelData.BrickStartOffsetX; i < (LevelData.COLS4 * LevelData.BW
+                for (int i = LevelData.BrickStartOffsetX; i < (LevelData.COLS5 * LevelData.BW
                         + LevelData.BrickStartOffsetX); i = i + LevelData.BW)
-                    for (int j = LevelData.BrickStartOffsetY; j < (i * LevelData.BH
+                    for (int j = LevelData.BrickStartOffsetY; j < (LevelData.ROWS5 * LevelData.BH
                             + LevelData.BrickStartOffsetY); j = j + LevelData.BH)
                         bricks.add(new Bricks(i, j, LevelData.BW, LevelData.BH, LevelData.BrickHit5));
                 break;
@@ -119,7 +119,7 @@ public class BricksBreaker {
     public int[] getbricksX() {// converting Array List to array
         int[] X = new int[bricks.size()];
         for (int i = 0; i < X.length; i++) {
-            X[i] = bricks.get(i).X;
+            X[i] = bricks.get(i).getX();
         }
         return X;
     }
@@ -127,9 +127,17 @@ public class BricksBreaker {
     public int[] getbricksY() {// coverting Array List to array
         int[] Y = new int[bricks.size()];
         for (int i = 0; i < Y.length; i++) {
-            Y[i] = bricks.get(i).Y;
+            Y[i] = bricks.get(i).getY();
         }
         return Y;
+    }
+
+    public int[] getbricksHit() {// coverting Array List to array
+        int[] Hits = new int[bricks.size()];
+        for (int i = 0; i < Hits.length; i++) {
+            Hits[i] = bricks.get(i).getBrickHits();
+        }
+        return Hits;
     }
 
     /*paddle Getter*/

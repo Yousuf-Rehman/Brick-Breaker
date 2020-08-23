@@ -69,8 +69,8 @@ public class MVC_MAIN {
                 Frame2.setLayout(null);
                 Frame2.setVisible(true);
 
-                String[] backcolorStrings = { "Black", "Green", "Blue", "Gray", "DARK_GRAY", "RED", "Yellow" };
-                Color [] backcolors = {Color.BLACK, Color.GREEN, Color.BLUE, Color.GRAY, Color.DARK_GRAY, Color.RED, Color.YELLOW};
+                String[] backcolorStrings = { "Black", "Green", "Blue", "Gray", "DARK_GRAY", "Yellow" };
+                Color [] backcolors = {Color.BLACK, Color.GREEN, Color.BLUE, Color.GRAY, Color.DARK_GRAY, Color.YELLOW};
 
                 JLabel BackGroundcolorLabel = new JLabel();
                 BackGroundcolorLabel.setText("BackGround color");

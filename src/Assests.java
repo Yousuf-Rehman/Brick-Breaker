@@ -43,6 +43,14 @@ class Bricks extends Assests {
     public int getHeight() {// brick height
         return LevelData.BH;
     }
+
+    public void BrickHitsDec(){
+        brickHits--;
+    }
+
+    public int getBrickHits(){
+        return brickHits;
+    }
 }
 
 class Ball extends Assests {
@@ -73,7 +81,10 @@ class Ball extends Assests {
             if(new Rectangle(bricks.get(i).X, bricks.get(i).Y,
                     bricks.get(i).getWidth(), bricks.get(i).getHeight()).
                     intersects(new Rectangle(X, Y, br, br))) {
-                bricks.remove(i);
+                if(bricks.get(i).getBrickHits()<=1)
+                    bricks.remove(i);
+                else
+                    bricks.get(i).BrickHitsDec();
                 //BallX_Step = -BallX_Step;
                 BallY_Step = -BallY_Step;
                 scores += 5;
