@@ -27,6 +27,7 @@ public class View extends JPanel {
     protected int PXpos, PYpos, PW, PH;
 
     protected int BallXpos, BallYpos, BallR;
+
     View(int RW, int RH, Color bricksColor, Color backGroundColor, Color paddleColor, Color ballColor) {
         RECT_WIDTH = RW;
         RECT_HEIGHT = RH;
@@ -60,12 +61,12 @@ public class View extends JPanel {
         this.BallR = BallR;
     }
 
-    void SetScore(int s, int hs){
+    void SetScore(int s, int hs) {
         scores = s;
         Highscores = hs;
     }
 
-    void SetLevel(int l){
+    void SetLevel(int l) {
         level = l;
     }
 
@@ -74,7 +75,7 @@ public class View extends JPanel {
     }
 
     @Override
-    protected void paintComponent(Graphics g) {/*main display function: display all data*/
+    protected void paintComponent(Graphics g) {/* main display function: display all data */
         super.paintComponent(g);
         // g.drawImage(background_Image, 0, 0, null);
         g.setColor(BackGroundColor);
@@ -83,14 +84,14 @@ public class View extends JPanel {
         if (Xpos != null)
             for (int i = 0; i < Xpos.length; i++) {
 
-                if(bricksHit[i] == 2)
+                if (bricksHit[i] == 2)
                     g.setColor(Color.RED);
                 else
                     g.setColor(BricksColor);
                 Rectangle r = new Rectangle(Xpos[i], Ypos[i], rw, rh);
                 g.fillRect((int) r.getX(), (int) r.getY(), (int) r.getWidth(), (int) r.getHeight());
 
-                if(BricksColor == Color.WHITE)
+                if (BricksColor == Color.WHITE)
                     g.setColor(Color.BLACK);
                 else
                     g.setColor(Color.WHITE);
@@ -101,12 +102,12 @@ public class View extends JPanel {
         Rectangle r = new Rectangle(PXpos, PYpos, PW, PH);
         g.fillRect((int) r.getX(), (int) r.getY(), (int) r.getWidth(), (int) r.getHeight());
 
-        g.setColor(Color.WHITE);/*Boundary of Paddle*/
+        g.setColor(Color.WHITE);/* Boundary of Paddle */
         g.drawRect(PXpos, PYpos, PW, PH);
 
         g.setColor(BallColor);
         int diameter = BallR * 2;
-        //shift x and y by the radius of the circle in order to correctly center it
+        // shift x and y by the radius of the circle in order to correctly center it
         g.fillOval(BallXpos - BallR, BallYpos - BallR, diameter, diameter);
         g.setColor(Color.WHITE);
         g.drawOval(BallXpos - BallR, BallYpos - BallR, diameter, diameter);
@@ -114,8 +115,8 @@ public class View extends JPanel {
         UpdatingPlayersData(g);
     }
 
-    /*score and other stuff is displayed here*/
-    private void UpdatingPlayersData(Graphics g){
+    /* score and other stuff is displayed here */
+    private void UpdatingPlayersData(Graphics g) {
         g.setColor(Color.BLACK);
         g.setFont(font);
         g.drawString("Scores: ", RECT_WIDTH + 20, 30);

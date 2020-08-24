@@ -44,11 +44,11 @@ class Bricks extends Assests {
         return LevelData.BH;
     }
 
-    public void BrickHitsDec(){
+    public void BrickHitsDec() {
         brickHits--;
     }
 
-    public int getBrickHits(){
+    public int getBrickHits() {
         return brickHits;
     }
 }
@@ -64,42 +64,43 @@ class Ball extends Assests {
         this.br = br;
     }
 
-    /*Ball getter Setter*/
+    /* Ball getter Setter */
     public int getRadius() {
         return LevelData.BR;
     }
 
-
-    public int Movement(ArrayList<Bricks> bricks, Paddle paddle, int BoundWidth, int BoundHeight){//collision with other
+    public int Movement(ArrayList<Bricks> bricks, Paddle paddle, int BoundWidth, int BoundHeight) {// collision with
+        // other
 
         int scores = 0;
 
         X += BallX_Step;
         Y += BallY_Step;
 
-        for(int i=0; i<bricks.size(); i++)
-            if(new Rectangle(bricks.get(i).X, bricks.get(i).Y,
-                    bricks.get(i).getWidth(), bricks.get(i).getHeight()).
-                    intersects(new Rectangle(X, Y, br, br))) {
-                if(bricks.get(i).getBrickHits()<=1)
+        for (int i = 0; i < bricks.size(); i++)
+            if (new Rectangle(bricks.get(i).X, bricks.get(i).Y, bricks.get(i).getWidth(), bricks.get(i).getHeight())
+                    .intersects(new Rectangle(X, Y, br, br))) {
+                if (bricks.get(i).getBrickHits() <= 1)
                     bricks.remove(i);
                 else
                     bricks.get(i).BrickHitsDec();
-                //BallX_Step = -BallX_Step;
+                // BallX_Step = -BallX_Step;
                 BallY_Step = -BallY_Step;
                 scores += 5;
             }
 
-        if(new Rectangle(paddle.getX(), paddle.getY(),
-                paddle.getWidth(), paddle.getHeight()).
-                intersects(new Rectangle(X, Y, br, br)))
+        if (new Rectangle(paddle.getX(), paddle.getY(), paddle.getWidth(), paddle.getHeight())
+                .intersects(new Rectangle(X, Y, br, br)))
             BallY_Step = -BallY_Step;
 
-        if(X <= 0 || X >= BoundWidth)
+        if (X <= 0 || X >= BoundWidth)
             BallX_Step = -BallX_Step;
 
-        if(Y <= 0 || Y >= BoundHeight)
+        if (Y <= 0)
             BallY_Step = -BallY_Step;
+
+        if (Y >= BoundHeight)
+            return -1;// game is exit
 
         return scores;
     }
@@ -115,7 +116,7 @@ class Paddle extends Assests {
         this.ph = ph;
     }
 
-    /*Paddle getter Setter*/
+    /* Paddle getter Setter */
     public int getWidth() {
         return pw;
     }
@@ -124,16 +125,16 @@ class Paddle extends Assests {
         return ph;
     }
 
-    /*Paddle Movement*/
-    public int Movement(int direction, int BoundWidth, int BoundHeight){
+    /* Paddle Movement */
+    public int Movement(int direction, int BoundWidth, int BoundHeight) {
 
-        switch (direction){
-            case 1://right
-                if( (X + pw + LevelData.PADDLE_STEP) <= BoundWidth)
+        switch (direction) {
+            case 1:// right
+                if ((X + pw + LevelData.PADDLE_STEP) <= BoundWidth)
                     X = X + LevelData.PADDLE_STEP;
                 break;
-            case 2://left
-                if(X - LevelData.PADDLE_STEP >= 0)
+            case 2:// left
+                if (X - LevelData.PADDLE_STEP >= 0)
                     X = X - LevelData.PADDLE_STEP;
                 break;
         }

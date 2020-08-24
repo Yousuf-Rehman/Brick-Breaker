@@ -1,5 +1,6 @@
 /*Model*/
 
+import javax.swing.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -28,9 +29,9 @@ public class BricksBreaker {
                 paddle = new Paddle(BoundWidth / 2, BoundHeight - 80, LevelData.PW1, LevelData.PH1);
                 ball = new Ball(BoundWidth / 2, BoundHeight - 100, LevelData.BR);
                 for (int i = LevelData.BrickStartOffsetX; i < (LevelData.COLS1 * LevelData.BW
-                    + LevelData.BrickStartOffsetX); i = i + LevelData.BW)
+                        + LevelData.BrickStartOffsetX); i = i + LevelData.BW)
                     for (int j = LevelData.BrickStartOffsetY; j < (LevelData.ROWS1 * LevelData.BH
-                        + LevelData.BrickStartOffsetY); j = j + LevelData.BH)
+                            + LevelData.BrickStartOffsetY); j = j + LevelData.BH)
                         bricks.add(new Bricks(i, j, LevelData.BW, LevelData.BH, LevelData.BrickHit1));
                 break;
 
@@ -74,7 +75,7 @@ public class BricksBreaker {
                 count = 1;
                 for (int j = LevelData.BrickStartOffsetY; j < (LevelData.ROWS4 * LevelData.BH
                         + LevelData.BrickStartOffsetY); j = j + LevelData.BH) {
-                    for (int i = BoundWidth/2 - LevelData.BW, k=0; k < count; i = i - LevelData.BW, k++) {
+                    for (int i = BoundWidth / 2 - LevelData.BW, k = 0; k < count; i = i - LevelData.BW, k++) {
                         bricks.add(new Bricks(i, j, LevelData.BW, LevelData.BH, LevelData.BrickHit4));
                     }
                     count++;
@@ -93,7 +94,6 @@ public class BricksBreaker {
                 break;
 
             default:
-
                 break;
         }
 
@@ -103,8 +103,8 @@ public class BricksBreaker {
         return level;
     }
 
-    /*bricks ArrayList getter*/
-    public ArrayList<Bricks> getBricks(){
+    /* bricks ArrayList getter */
+    public ArrayList<Bricks> getBricks() {
         return bricks;
     }
 
@@ -140,30 +140,32 @@ public class BricksBreaker {
         return Hits;
     }
 
-    /*paddle Getter*/
-    public Paddle getPaddle(){
+    /* paddle Getter */
+    public Paddle getPaddle() {
         return paddle;
     }
 
-    /*ball Getter*/
-    public Ball getBall(){
+    /* ball Getter */
+    public Ball getBall() {
         return ball;
     }
 
-    public void scoreInc(int s){
+    public void scoreInc(int s) {
         score += s;
-        if(HighScore <= score)
+        if (HighScore <= score)
             HighScore = score;
     }
 
-    public int getScore(){
+    public int getScore() {
         return score;
     }
 
-    public int getHighScore(){ return HighScore;}
+    public int getHighScore() {
+        return HighScore;
+    }
 
-    public void LevelUpIfBricksEmpty(){
-        if(bricks.size() <= 0) {
+    public void LevelUpIfBricksEmpty() {
+        if (bricks.size() <= 0) {
             level++;
             SetLevel(level);
         }
