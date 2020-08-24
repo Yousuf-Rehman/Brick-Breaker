@@ -1,14 +1,8 @@
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
+/**
+ * This class will show the game display to the user (game area and score area is cattered here)
+ */
 public class View extends JPanel {
 
     protected static int RECT_WIDTH;

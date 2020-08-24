@@ -5,6 +5,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**
+ * This class shows the first play setting screen and pass the data to controller after the selection
+ * The color selection for background bricks etc is done here
+ */
 public class MVC_MAIN {
     private static Controller c;
     private static final int BoundWidth = 300, BoundHeight = 300;
@@ -17,7 +21,7 @@ public class MVC_MAIN {
         new MVC_MAIN();
     }
 
-    MVC_MAIN() {
+    MVC_MAIN() {/*Screen 1 to display PLay button and Setting Button*/
         // Screen 1
         Frame = new JFrame();
 
@@ -34,22 +38,23 @@ public class MVC_MAIN {
         Frame.setVisible(true);
     }
 
-    void PlayButton_function() {
-        JButton PlayButton = new JButton("Play");
+    void PlayButton_function() {/* Screen2 Play button Display... */
+        JButton PlayButton = new JButton("Play");/*play button*/
         PlayButton.setBounds(BoundWidth / 2 - 50, 50, 100, 30);
-        PlayButton.addActionListener(new ActionListener() {
+        PlayButton.addActionListener(new ActionListener() {/*Play button on click this function executes for palying game*/
             public void actionPerformed(ActionEvent e) {
-                c = new Controller(BricksColor, BackGroundColor, PaddleColor, BallColor);
+                c = new Controller(BricksColor, BackGroundColor, PaddleColor, BallColor);/*RUN THE CONTROLLER*/
                 // Frame.setVisible(false);
             }
         });
         Frame.add(PlayButton);
     }
 
-    void SettingButton_function() {/* Screen2 */
-        JButton SettingButton = new JButton("Settings");
+    void SettingButton_function() {/* Screen2 => Setting button Display...for selecting the colors for game assests and background*/
+
+        JButton SettingButton = new JButton("Settings");/*Setting button*/
         SettingButton.setBounds(BoundWidth / 2 - 50, 100, 100, 30);
-        SettingButton.addActionListener(new ActionListener() {
+        SettingButton.addActionListener(new ActionListener() {/*Setting button on click this function executes*/
             public void actionPerformed(ActionEvent e) {
                 Frame.setEnabled(false);
                 JFrame Frame2;
@@ -130,6 +135,7 @@ public class MVC_MAIN {
                 });
                 BallcolorList.setBounds(BoundWidth / 2 - 50, 180, 100, 30);
 
+                /*add all these widgets(labels and comboBox) to the Frame2*/
                 Frame2.add(BackGroundcolorLabel);
                 Frame2.add(BackGroundcolorList);
                 Frame2.add(BrickcolorLabel);

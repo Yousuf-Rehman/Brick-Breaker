@@ -2,9 +2,12 @@ import javafx.scene.shape.Circle;
 
 import java.awt.*;
 import java.util.ArrayList;
-
+/**
+ * Assets class has all the element used for the game
+ * This class is inherited by all the assets of game( bricks, ball, paddle) used in game
+ */
 public abstract class Assests {
-    protected int X, Y;
+    protected int X, Y;/*X,Y is the co-ordinates of the assets each asset must has X,Y*/
 
     void setX(int x) {
         X = x;
@@ -25,7 +28,7 @@ public abstract class Assests {
 
 class Bricks extends Assests {
 
-    private int bw, bh;
+    private int bw, bh;/*bricks width, bricks height*/
     private int brickHits;
 
     Bricks(int x, int y, int bw, int bh, int brickHits) {
@@ -33,7 +36,7 @@ class Bricks extends Assests {
         Y = y;
         this.bw = bw;
         this.bh = bh;
-        this.brickHits = brickHits;
+        this.brickHits = brickHits;/*Number of brick hits required, this number will decrement when gets hit until zero*/
     }
 
     public int getWidth() {// brick width
@@ -44,11 +47,11 @@ class Bricks extends Assests {
         return LevelData.BH;
     }
 
-    public void BrickHitsDec() {
+    public void BrickHitsDec() {/*brick hit keeps on decrement when hit until zero*/
         brickHits--;
     }
 
-    public int getBrickHits() {
+    public int getBrickHits() {/*get bricks hit for other classes*/
         return brickHits;
     }
 }
@@ -69,37 +72,41 @@ class Ball extends Assests {
         return LevelData.BR;
     }
 
-    public int Movement(ArrayList<Bricks> bricks, Paddle paddle, int BoundWidth, int BoundHeight) {// collision with
-        // other
+    public int Movement(ArrayList<Bricks> bricks, Paddle paddle, int BoundWidth, int BoundHeight) {//check ball collision with
+        // other bricks and padlle
 
-        int scores = 0;
+        int scores = 0;/*score get increment if bricks are hitted*/
 
         X += BallX_Step;
         Y += BallY_Step;
 
-        for (int i = 0; i < bricks.size(); i++)
+        for (int i = 0; i < bricks.size(); i++)/*check for all bricks if get hit by ball*/
             if (new Rectangle(bricks.get(i).X, bricks.get(i).Y, bricks.get(i).getWidth(), bricks.get(i).getHeight())
                     .intersects(new Rectangle(X, Y, br, br))) {
-                if (bricks.get(i).getBrickHits() <= 1)
-                    bricks.remove(i);
-                else
+
+                if (bricks.get(i).getBrickHits() <= 1) {/*when the brick hits already remain one and ball is hitted it now*/
                     bricks.get(i).BrickHitsDec();
+                    bricks.remove(i);/*remove that brick from array list..object will be removed*/
+                }
+                else
+                    bricks.get(i).BrickHitsDec();/*otherwise just decrement the hits, no need to remove that brick*/
                 // BallX_Step = -BallX_Step;
-                BallY_Step = -BallY_Step;
-                scores += 5;
+
+                BallY_Step = -BallY_Step;/*if collide with any brick, change direction*/
+                scores += 5;/*set the score on hit to bricks only*/
             }
 
-        if (new Rectangle(paddle.getX(), paddle.getY(), paddle.getWidth(), paddle.getHeight())
+        if (new Rectangle(paddle.getX(), paddle.getY(), paddle.getWidth(), paddle.getHeight())/*check collison with paddle*/
                 .intersects(new Rectangle(X, Y, br, br)))
-            BallY_Step = -BallY_Step;
+            BallY_Step = -BallY_Step;/*if collide with paddle, change direction*/
 
-        if (X <= 0 || X >= BoundWidth)
+        if (X <= 0 || X >= BoundWidth)/*if on boundary, ball change directon*/
             BallX_Step = -BallX_Step;
 
-        if (Y <= 0)
+        if (Y <= 0)/*if on boundary, ball change directon*/
             BallY_Step = -BallY_Step;
 
-        if (Y >= BoundHeight)
+        if (Y >= BoundHeight)/*this means below paddle, send -1 to the controller to end game*/
             return -1;// game is exit
 
         return scores;
@@ -125,10 +132,10 @@ class Paddle extends Assests {
         return ph;
     }
 
-    /* Paddle Movement */
+    /* Paddle Movement, trigger by controller on user left/right key pressed */
     public int Movement(int direction, int BoundWidth, int BoundHeight) {
 
-        switch (direction) {
+        switch (direction) {/*left or right direction*/
             case 1:// right
                 if ((X + pw + LevelData.PADDLE_STEP) <= BoundWidth)
                     X = X + LevelData.PADDLE_STEP;
